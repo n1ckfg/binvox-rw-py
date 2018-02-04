@@ -168,7 +168,6 @@ def read_as_coord_array(fp, fix_coords=True):
     """
     dims, translate, scale = read_header(fp)
     raw_data = np.frombuffer(fp.read(), dtype=np.uint8)
-
     values, counts = raw_data[::2], raw_data[1::2]
 
     sz = np.prod(dims)
@@ -189,8 +188,10 @@ def read_as_coord_array(fp, fix_coords=True):
     # index = x * wxh + z * width + y; // wxh = width * height = d * d
 
     x = nz_voxels / (dims[0]*dims[1])
+    x = x.astype(int)
     zwpy = nz_voxels % (dims[0]*dims[1]) # z*w + y
     z = zwpy / dims[0]
+    z = z.astype(int)
     y = zwpy % dims[0]
     if fix_coords:
         data = np.vstack((x, y, z))
