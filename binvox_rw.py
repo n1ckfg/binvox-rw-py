@@ -27,8 +27,8 @@ Binvox to Numpy and back.
 ...
 >>> m1.dims
 [32, 32, 32]
->>> m1.scale
-41.133000000000003
+>>> round(m1.scale,3)
+41.133
 >>> m1.translate
 [0.0, 0.0, 0.0]
 >>> with open('chair_out.binvox', 'wb') as f:
